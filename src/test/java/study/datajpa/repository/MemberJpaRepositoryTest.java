@@ -16,7 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @Transactional
 class MemberJpaRepositoryTest {
 
-    @Autowired MemberJpaRepository memberJpaRepository;
+    @Autowired
+    MemberJpaRepository memberJpaRepository;
 
     @Test
     public void testMember() {
@@ -33,7 +34,7 @@ class MemberJpaRepositoryTest {
         System.out.println(member.getId());
         System.out.println("================");
 
-        System.out.println(member==savedMember);
+        System.out.println(member == savedMember);
         System.out.println(member);
         System.out.println(savedMember);
         assertThat(member).isEqualTo(savedMember);
@@ -72,7 +73,7 @@ class MemberJpaRepositoryTest {
     }
 
     @Test
-    public void findByUsernameAndAgeGreaterThan()  {
+    public void findByUsernameAndAgeGreaterThan() {
         //given
         Member m1 = new Member("AAA", 10);
         Member m2 = new Member("AAA", 20);
@@ -89,5 +90,29 @@ class MemberJpaRepositoryTest {
         assertThat(result.get(0).getAge()).isEqualTo(20);
         assertThat(result.size()).isEqualTo(1);
     }
-        
+
+    @Test
+    public void paging() {
+
+        //given 이런 데이터가 있을 떄
+        memberJpaRepository.save(new Member("member1", 10));
+        memberJpaRepository.save(new Member("member2", 10));
+        memberJpaRepository.save(new Member("member3", 10));
+        memberJpaRepository.save(new Member("member4", 10));
+        memberJpaRepository.save(new Member("member5", 10));
+
+        int age = 10;
+        int offset = 0;
+        int limit = 3;
+
+        //when 이렇게 하면
+        List<Member> members = memberJpaRepository.findByPage(age, offset, limit);
+        long totalCount = memberJpaRepository.totalCount(age);
+
+        //then
+        assertThat(members.size()).isEqualTo(3);
+        assertThat(totalCount).isEqualTo(5);
+
+    }
+
 }
