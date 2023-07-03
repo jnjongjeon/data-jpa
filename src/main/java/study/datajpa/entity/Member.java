@@ -11,10 +11,11 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id", "username", "age"})
 @NamedQuery(
-        name="Member.findByUsername",
+        name = "Member.findByUsername",
         query = "select m from Member m where m.username = :username"
 )
-public class Member {
+@NamedEntityGraph(name = "Member.all", attributeNodes = @NamedAttributeNode("team"))
+public class Member extends BaseEntity {
 
     @GeneratedValue
     @Id
@@ -26,7 +27,7 @@ public class Member {
     private String username;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="team_id")
+    @JoinColumn(name = "team_id")
     private Team team;
 
     public Member(String username) {
