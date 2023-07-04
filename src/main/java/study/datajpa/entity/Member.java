@@ -3,6 +3,7 @@ package study.datajpa.entity;
 import lombok.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.*;
 
 @Entity
@@ -15,7 +16,7 @@ import javax.persistence.*;
         query = "select m from Member m where m.username = :username"
 )
 @NamedEntityGraph(name = "Member.all", attributeNodes = @NamedAttributeNode("team"))
-public class Member extends BaseEntity {
+public class Member extends BaseTimeEntity {
 
     @GeneratedValue
     @Id
@@ -51,6 +52,4 @@ public class Member extends BaseEntity {
         this.team = team;
         team.getMembers().add(this);
     }
-
-
 }

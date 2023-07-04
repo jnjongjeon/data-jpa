@@ -12,6 +12,15 @@ spring:
       hibernate:
         # show_sql: true
         format_sql: true
+
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true # 페이지 1번부터. 대신 한계가 있음
+        default-page-size: 10 # 기본으로 가져오는 게 10개로 변경
+        max-page-size: 2000 # 최대 페이지 사이즈 변경
+
+
 logging.level:
   org.hibernate.SQL: debug
 # org.hibernate.type: trace
