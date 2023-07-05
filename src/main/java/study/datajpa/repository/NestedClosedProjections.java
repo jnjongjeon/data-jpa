@@ -4,6 +4,8 @@ public interface NestedClosedProjections {
 
     String getUsername();
 
+    int getAge();
+
     TeamInfo getTeam();
 
     interface TeamInfo {

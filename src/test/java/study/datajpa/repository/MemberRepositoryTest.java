@@ -354,7 +354,35 @@ class MemberRepositoryTest {
         List<NestedClosedProjections> result = memberRepository.findProjectionsByUsername("m1", NestedClosedProjections.class);
 
         for (NestedClosedProjections nestedClosedProjections : result) {
-            System.out.println("usernameOnlyDto = " + nestedClosedProjections.getUsername());
+            String username = nestedClosedProjections.getUsername();
+            int age = nestedClosedProjections.getAge();
+            String teamName = nestedClosedProjections.getTeam().getName();
+            System.out.println("username = " + username);
+            System.out.println("teamName = " + teamName);
+            System.out.println("age = " + age);
+        }
+    }
+
+    @Test
+    public void nativeQuery() {
+
+        //given
+        Team teamA = new Team("teamA");
+        em.persist(teamA);
+        Member m1 = new Member("m1", 1, teamA);
+        Member m2 = new Member("m2", 1, teamA);
+        em.persist(m1);
+        em.persist(m2);
+
+        em.flush();
+        em.clear();
+
+        //when
+        Page<MemberProjection> result = memberRepository.findByNativeProjection(PageRequest.of(0, 10));
+        List<MemberProjection> content = result.getContent();
+        for (MemberProjection memberProjection : content) {
+            System.out.println("memberProjection = " + memberProjection.getUsername());
+            System.out.println("memberProjection = " + memberProjection.getTeamName());
         }
     }
 
