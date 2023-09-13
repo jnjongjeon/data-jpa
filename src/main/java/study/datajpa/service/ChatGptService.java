@@ -28,7 +28,7 @@ public class ChatGptService {
     private final RestTemplate restTemplate;
 
     public HttpEntity<ChatGptRequest> buildHttpEntity(ChatGptRequest chatGptRequest){
-        String apiKey = "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";
+        String apiKey = "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";
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.parseMediaType(ChatGptConfig.MEDIA_TYPE));
         httpHeaders.add(ChatGptConfig.AUTHORIZATION, ChatGptConfig.BEARER + apiKey);

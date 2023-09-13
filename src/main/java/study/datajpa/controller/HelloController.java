@@ -39,6 +39,7 @@ public class HelloController {
             HashMap<String, Object> userRequest = (HashMap<String, Object>) params.get("userRequest");
             String url = userRequest.get("callbackUrl").toString();
             String utter = userRequest.get("utterance").toString().replace("\n","");
+            System.out.println(utter);
             System.out.println(url);
             resultJson.put("version", "2.0");
             resultJson.put("useCallback", true);

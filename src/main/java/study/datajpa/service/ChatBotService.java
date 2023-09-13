@@ -25,6 +25,7 @@ public class ChatBotService {
         HttpEntity<UrlDto> urlDtoHttpEntity = new HttpEntity<>(urlDto, headers);
         RestTemplate rt = new RestTemplate();
 
-        rt.exchange("https://7a1c-211-218-11-173.ngrok.io/v2", HttpMethod.POST, urlDtoHttpEntity, String.class);
+        //rt.exchange("https://b5fe-211-218-11-173.ngrok.io/v2", HttpMethod.POST, urlDtoHttpEntity, String.class);
+        rt.exchange("http://localhost:8080/v2", HttpMethod.POST, urlDtoHttpEntity, String.class);
     }
 }
