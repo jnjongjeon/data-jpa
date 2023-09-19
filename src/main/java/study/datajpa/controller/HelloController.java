@@ -43,7 +43,7 @@ public class HelloController {
             System.out.println(url);
             resultJson.put("version", "2.0");
             resultJson.put("useCallback", true);
-
+            System.out.println("Test");
             chatBotService.aa(url, utter);
         } catch (Exception e) {
 
